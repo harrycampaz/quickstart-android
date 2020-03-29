@@ -1,12 +1,14 @@
 package com.google.firebase.quickstart.database;
 
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import com.google.firebase.quickstart.database.java.SignInActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,15 +16,15 @@ import org.junit.runner.RunWith;
 
 import java.util.Random;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 
 @LargeTest
@@ -46,50 +48,50 @@ public class NewPostTest {
 
         // Select email field
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.field_email),
-                        withParent(withId(R.id.layout_email_password)),
+                allOf(withId(R.id.fieldEmail),
+                        withParent(withId(R.id.layoutEmailPassword)),
                         isDisplayed()));
         appCompatEditText.perform(click());
 
         // Enter email address
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.field_email),
-                        withParent(withId(R.id.layout_email_password)),
+                allOf(withId(R.id.fieldEmail),
+                        withParent(withId(R.id.layoutEmailPassword)),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText(email));
 
         // Enter password
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.field_password),
-                        withParent(withId(R.id.layout_email_password)),
+                allOf(withId(R.id.fieldPassword),
+                        withParent(withId(R.id.layoutEmailPassword)),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText(password));
 
         // Click sign up
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.button_sign_up), withText(R.string.sign_up),
-                        withParent(withId(R.id.layout_buttons)),
+                allOf(withId(R.id.buttonSignUp), withText(R.string.sign_up),
+                        withParent(withId(R.id.layoutButtons)),
                         isDisplayed()));
         appCompatButton.perform(click());
 
         // Click new post button
         ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.fab_new_post), isDisplayed()));
+                allOf(withId(R.id.fabNewPost), isDisplayed()));
         floatingActionButton.perform(click());
 
         // Enter post title
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.field_title), isDisplayed()));
+                allOf(withId(R.id.fieldTitle), isDisplayed()));
         appCompatEditText4.perform(replaceText(postTitle));
 
         // Enter post content
         ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.field_body), isDisplayed()));
+                allOf(withId(R.id.fieldBody), isDisplayed()));
         appCompatEditText5.perform(replaceText(postContent));
 
         // Click submit button
         ViewInteraction floatingActionButton2 = onView(
-                allOf(withId(R.id.fab_submit_post), isDisplayed()));
+                allOf(withId(R.id.fabSubmitPost), isDisplayed()));
         floatingActionButton2.perform(click());
 
         // Navigate to "My Posts"
@@ -99,18 +101,18 @@ public class NewPostTest {
 
         // Check that the title is correct
         ViewInteraction textView = onView(
-                allOf(withId(R.id.post_title), withText(postTitle), isDisplayed()));
+                allOf(withId(R.id.postTitle), withText(postTitle), isDisplayed()));
         textView.check(matches(withText(postTitle)));
 
         // Check that the content is correct
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.post_body), withText(postContent), isDisplayed()));
+                allOf(withId(R.id.postBody), withText(postContent), isDisplayed()));
         textView2.check(matches(withText(postContent)));
 
         // Check that it has zero stars
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.post_num_stars), withText("0"),
-                        withParent(withId(R.id.star_layout)),
+                allOf(withId(R.id.postNumStars), withText("0"),
+                        withParent(withId(R.id.starLayout)),
                         isDisplayed()));
         textView3.check(matches(withText("0")));
 

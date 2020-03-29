@@ -1,13 +1,15 @@
 package com.google.firebase.quickstart.auth;
 
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import com.google.firebase.quickstart.auth.java.EmailPasswordActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,14 +19,14 @@ import org.junit.runner.RunWith;
 
 import java.util.Random;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 
 @LargeTest
@@ -71,8 +73,8 @@ public class EmailPasswordTest {
 
         // Click sign in
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.email_sign_in_button), withText(R.string.sign_in),
-                        withParent(withId(R.id.email_password_buttons)),
+                allOf(withId(R.id.emailSignInButton), withText(R.string.sign_in),
+                        withParent(withId(R.id.emailPasswordButtons)),
                         isDisplayed()));
         appCompatButton.perform(click());
 
@@ -97,13 +99,13 @@ public class EmailPasswordTest {
 
         // Click sign up
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.email_create_account_button), withText(R.string.create_account),
-                        withParent(withId(R.id.email_password_buttons)),
+                allOf(withId(R.id.emailCreateAccountButton), withText(R.string.create_account),
+                        withParent(withId(R.id.emailPasswordButtons)),
                         isDisplayed()));
         appCompatButton.perform(click());
 
         // Sign out button shown
-        onView(allOf(withId(R.id.sign_out_button), withText(R.string.sign_out), isDisplayed()));
+        onView(allOf(withId(R.id.signOutButton), withText(R.string.sign_out), isDisplayed()));
 
         // User email shown
         String emailString = mActivityTestRule.getActivity()
@@ -120,8 +122,8 @@ public class EmailPasswordTest {
 
         // Click sign in
         ViewInteraction signInButton = onView(
-                allOf(withId(R.id.email_sign_in_button), withText(R.string.sign_in),
-                        withParent(withId(R.id.email_password_buttons)),
+                allOf(withId(R.id.emailSignInButton), withText(R.string.sign_in),
+                        withParent(withId(R.id.emailPasswordButtons)),
                         isDisplayed()));
         signInButton.perform(click());
 
@@ -132,7 +134,7 @@ public class EmailPasswordTest {
 
     private void signOutIfPossible() {
         try {
-            onView(allOf(withId(R.id.sign_out_button), withText(R.string.sign_out), isDisplayed()))
+            onView(allOf(withId(R.id.signOutButton), withText(R.string.sign_out), isDisplayed()))
                     .perform(click());
         } catch (NoMatchingViewException e) {
             // Ignore
@@ -142,16 +144,16 @@ public class EmailPasswordTest {
 
     private void enterEmail(String email) {
         ViewInteraction emailField = onView(
-                allOf(withId(R.id.field_email),
-                        withParent(withId(R.id.email_password_fields)),
+                allOf(withId(R.id.fieldEmail),
+                        withParent(withId(R.id.emailPasswordFields)),
                         isDisplayed()));
         emailField.perform(replaceText(email));
     }
 
     private void enterPassword(String password) {
         ViewInteraction passwordField = onView(
-                allOf(withId(R.id.field_password),
-                        withParent(withId(R.id.email_password_fields)),
+                allOf(withId(R.id.fieldPassword),
+                        withParent(withId(R.id.emailPasswordFields)),
                         isDisplayed()));
         passwordField.perform(replaceText(password));
     }

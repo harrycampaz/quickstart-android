@@ -1,11 +1,13 @@
 package com.google.samples.quickstart.admobexample;
 
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
+import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.filters.LargeTest;
+
+import com.google.samples.quickstart.admobexample.java.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,13 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -34,12 +36,12 @@ public class InterstitialAdTest {
     @Before
     public void setUp() {
         mAdResource = new AdViewIdlingResource(mActivityTestRule.getActivity().getAdView());
-        Espresso.registerIdlingResources(mAdResource);
+        IdlingRegistry.getInstance().register(mAdResource);
     }
 
     @After
     public void tearDown() {
-        Espresso.unregisterIdlingResources(mAdResource);
+        IdlingRegistry.getInstance().unregister(mAdResource);
     }
 
     @Test
@@ -53,7 +55,7 @@ public class InterstitialAdTest {
 
         // Click show interstitial button
         ViewInteraction showInterstitialButton = onView(
-                allOf(withId(R.id.load_interstitial_button),
+                allOf(withId(R.id.loadInterstitialButton),
                         withText(R.string.interstitial_button_text),
                         isDisplayed()));
         showInterstitialButton.perform(click());

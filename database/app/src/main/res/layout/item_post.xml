@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,19 +11,19 @@
         android:padding="10dp">
 
         <include
-            android:id="@+id/post_author_layout"
+            android:id="@+id/postAuthorLayout"
             layout="@layout/include_post_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true" />
 
         <LinearLayout
-            android:id="@+id/star_layout"
+            android:id="@+id/starLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/post_author_layout"
+            android:layout_alignBottom="@+id/postAuthorLayout"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/post_author_layout"
+            android:layout_alignTop="@+id/postAuthorLayout"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -37,7 +37,7 @@
                 android:src="@drawable/ic_toggle_star_outline_24" />
 
             <TextView
-                android:id="@+id/post_num_stars"
+                android:id="@+id/postNumStars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -49,10 +49,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/post_author_layout"
+            android:layout_below="@+id/postAuthorLayout"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp" />
 
     </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
